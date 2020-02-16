@@ -1,0 +1,47 @@
+@font-face{
+	font-family: 'Source Sans Pro';
+	src: url('../fonts/SourceCodePro-Regular.ttf');
+}
+@font-face{
+	font-family: 'SanFranciscoText-Regular';
+	src: url('../fonts/SanFranciscoText-Regular.otf');
+}
+
+#app{
+    text-align: left;
+}
+html,body,#app{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family:"SanFranciscoText-Regular","Source Sans Pro" ;
+}
+#inspire > div.v-application--wrap > nav{
+    height:100% !important;
+}
+a{
+    text-decoration: none;
+}
+button{
+    outline: none;
+}
+button:focus{
+    outline: none;
+}
+/* 消除视频点击边框线 */
+.vjs-error-display.vjs-modal-dialog:focus,
+.vjs-tech:focus,.video-player.vjs-custom-skin:focus,#player-wrapper:focus{
+ outline: none!important;
+}
+
+.video-js .vjs-big-play-button{
+    /*
+     播放按钮换成圆形
+    */
+   height: 2em;
+   width: 2em;
+   background: transparent!important;
+   line-height: 2em;
+   border-radius: 1em;
+}
