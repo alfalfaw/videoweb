@@ -16,7 +16,8 @@ Vue.config.productionTip = false
 //   baseURL:"http://96.45.160.168:5000",
 
 // });
-axios.defaults.baseURL = 'http://localhost:5000';
+// axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'http://96.45.160.168:5000';
 
 //配置图片上传avue $httpajax
 Vue.prototype.$httpajax = axios

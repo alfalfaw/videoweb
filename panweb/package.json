@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@smallwei/avue": "^2.3.9",
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
     "hls.js": "^0.13.1",
@@ -25,7 +26,6 @@
     "@vue/cli-plugin-router": "^4.2.0",
     "@vue/cli-plugin-typescript": "^4.2.0",
     "@vue/cli-service": "^4.2.0",
-    "axios": "^0.19.2",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "typescript": "~3.7.5",
