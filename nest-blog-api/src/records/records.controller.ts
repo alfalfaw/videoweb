@@ -62,7 +62,6 @@ export class RecordsController {
 
         await this.recordModel.create(createRecordDto)
 
-
         // global.console.log(createRecordDto)
         return {
             success: true
@@ -111,18 +110,19 @@ export class RecordsController {
         }
         //筛选用户
         where['user'] = req.user._id
-        //只有喜欢需要有类型
-        if (resource == 'favorite') {
-            where['type'] = resource
-        }
+
+        //筛选类型
+        where['type'] = resource
+
         // global.console.log(where)
         //符合条件总数
         //不必去重，真实数据没有重复
         total = await this.recordModel.countDocuments(where)
+
         // global.console.log(total)
         //不分页
         if (typeof limit === 'undefined') {
-            data = await this.recordModel.find()
+            data = await this.recordModel.find(where)
         } else {
             //分页查询
             page_num = parseInt(page)
@@ -132,18 +132,42 @@ export class RecordsController {
             data = await this.recordModel.find(where, null, { skip: (page_num - 1) * limit_num, limit: limit_num, sort: sort })
 
         }
-        // global.console.log(data)
-        const list = data.map(item => {
-            // return item['video']
-            return { id: mongoose.Types.ObjectId(item['video']), type: item.type }
-        })
         let results = []
-        for (let item of list) {
-            const res = await this.videoModel.findById(item.id).lean()
-            res['type'] = item.type
-            results.push(res)
+        const video_list = data.map(item => {
+            // return item['video']
+            return mongoose.Types.ObjectId(item['video'])
+        })
+        if (resource == 'history') {
+            let favs = await this.recordModel.find({ user: req.user._id, type: 'favorite' }, { video: 1, _id: 0 }).lean()
+            favs = favs.map(it => {
+                return it['video'].toString()
+            })
+            // global.console.log(favs)
+            for (let video of video_list) {
+                const res = await this.videoModel.findById(video).lean()
+                if (favs.includes(video.toString())) {
+                    res['type'] = "favorite"
+                } else {
+                    res['type'] = "history"
+                }
+                results.push(res)
+            }
 
+        } else {
+            for (let video of video_list) {
+                const res = await this.videoModel.findById(video).lean()
+                res['type'] = "favorite"
+                results.push(res)
+            }
         }
+
+        // for (let item of list) {
+        //     const res = await this.videoModel.findById(item.id).lean()
+
+        //     res['type'] = item.type
+        //     results.push(res)
+
+        // }
         // results = Promise.all(list.map(async it => {
         //     //.lean().exec()生成js对象
         //     let doc = await this.videoModel.findById(it.id).lean().exec()
@@ -162,14 +186,15 @@ export class RecordsController {
         // global.console.log(req.user._id)
         // global.console.log(video)
         if (like == 'false') {
-            //收藏量减1
+            //收藏减1
             await this.videoModel.findByIdAndUpdate(video, { $inc: { favorite_num: -1 } })
             await this.recordModel.findOneAndDelete({ user: req.user._id, video: video, type: 'favorite' })
+
         } else {
-            // { upsert: true  }找不到就新建默认false
-            //收藏量加1
+            //收藏加1
             await this.videoModel.findByIdAndUpdate(video, { $inc: { favorite_num: 1 } })
-            await this.recordModel.findOneAndUpdate({ user: req.user._id, video: video, type: 'favorite' }, { $set: { user: req.user._id, video: video, type: 'favorite' } }, { upsert: true })
+            await this.recordModel.create({ user: req.user._id, video: video, type: 'favorite' })
+            await this.recordModel.findOneAndUpdate({ user: req.user._id, video: video, type: 'history' }, { $set: { user: req.user._id, video: video, type: 'history', updatedAt: Date.now() } }, { upsert: true })
         }
         // global.console.log(tmp)
 
@@ -178,7 +203,7 @@ export class RecordsController {
     @Get('history')
     @ApiOperation({ summary: '浏览' })
     async userHistory(@Request() req, @Query('video') video: string) {
-        await this.recordModel.findOneAndUpdate({ user: req.user._id, video: video, type: 'history' }, { $set: { user: req.user._id, video: video, type: 'history',updatedAt:Date.now() } }, { upsert: true })
+        await this.recordModel.findOneAndUpdate({ user: req.user._id, video: video, type: 'history' }, { $set: { user: req.user._id, video: video, type: 'history', updatedAt: Date.now() } }, { upsert: true })
         // await this.recordModel.create({ user: req.user._id, video: video, type: 'history' })
     }
 

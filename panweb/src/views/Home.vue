@@ -36,7 +36,9 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
       <!-- <v-icon class="mx-4">home</v-icon> -->
       <v-toolbar-title class="mr-12 align-center">
-        <span class="title white--text text--lighten-1">伢伢粉丝后援团</span>
+        <span class="title white--text text--lighten-1">
+       
+          伢伢粉丝后援团</span>
       </v-toolbar-title>
       <v-spacer />
       <v-row align="center" style="max-width: 650px">
@@ -114,7 +116,7 @@ export default class Home extends Vue {
   //登陆
   async login() {
     try {
-      const res = await this.$http.post("auth/login", this.loginModel);
+      const res = await this.$http.post("/auth/login", this.loginModel);
       if (res.data.access_token) {
         //保存token,nestjs规定token值必须前面加上"Bearer "
         window.sessionStorage.setItem(

@@ -74,8 +74,8 @@ export default class File extends Vue {
     url: null,
     publish: false
   };
-  image;
-  video;
+  image: any = null;
+  video: any = null;
   rules = [value => !value || value.size < 2000000 || "封面图不超过 2 MB!"];
   enable = false;
   mounted() {}
@@ -87,14 +87,35 @@ export default class File extends Vue {
     }
   }
   async submit() {
-    if(this.video==null||this.image==null) return
     let formData = new FormData();
-    formData.append("image", this.image);
-    formData.append("video", this.video);
-    const { data } = await this.$http.post("uploadmany", formData);
-    this.videoModel.cover = data.cover;
-    this.videoModel.url = data.url;
-    await this.$http.post("videos/create", this.videoModel);
+    if (this.video) {
+      formData.append("video", this.video);
+    }
+    if (this.image) {
+      formData.append("image", this.image);
+    }
+    // const { data } = await this.$http.post("uploadmany", formData);
+    try {
+      await this.$http
+        .post("uploadmany", formData)
+        .then(data => {
+          this.videoModel.cover = data.data.cover;
+          this.videoModel.url = data.data.url;
+        })
+        .then(async () => {
+          const { data } = await this.$http.post(
+            "videos/create",
+            this.videoModel
+          );
+          if (data.success) {
+            this.$message.success("上传成功");
+            this.reset();
+          }
+        });
+    } catch (error) {
+      this.$message.warning("上传失败");
+    }
+
   }
   reset() {
     this.videoModel.title = "";

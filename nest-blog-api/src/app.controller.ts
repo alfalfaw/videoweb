@@ -1,6 +1,6 @@
 import { Controller, Post, UseInterceptors, UploadedFile, UseGuards, Request, Get, UploadedFiles } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiProperty } from '@nestjs/swagger';
-import { FileInterceptor, FileFieldsInterceptor } from "@nestjs/platform-express"
+import { FileInterceptor, FileFieldsInterceptor, AnyFilesInterceptor, FilesInterceptor } from "@nestjs/platform-express"
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
 //
@@ -44,7 +44,7 @@ export class AppController {
   @UseInterceptors(FileInterceptor('file'))
   async upload(@UploadedFile('file') file) {
     //返回对象
-    return { url: `http://localhost:5000/uploads/${file.filename}` }
+    return { url: `https://alfalfa.website:5000/uploads/${file.filename}` }
   }
   //上传多个文件
   @Post('uploadmany')
@@ -55,16 +55,23 @@ export class AppController {
   uploadmany(@UploadedFiles() files) {
     let cover = null
     let url = null
-    const base_url = 'http://localhost:5000/uploads/'
-    let image = files['image'][0]
-    let video = files['video'][0]
-    // let index1 = image.mimetype.lastIndexOf("\/")
-    // let index2 = video.mimetype.lastIndexOf("\/")
-    //+ '.' + image.mimetype.substring(index1 + 1, image.mimetype.length)
-    //+ '.' + video.mimetype.substring(index2 + 1, video.mimetype.length)
-    cover = base_url + image.filename
-    url = base_url + video.filename
-    return { cover: cover, url: url }
+    const base_url = 'https://alfalfa.website:5000/uploads/'
+    let image = null
+    let video = null
+    if (files.image) {
+      image = files['image'][0]
+      cover = base_url + image.filename
+    }
+    if (files.video) {
+      video = files['video'][0]
+      url = base_url + video.filename
+    }
+
+    return { cover: cover, url: url, success: true }
+    // // let index1 = image.mimetype.lastIndexOf("\/")
+    // // let index2 = video.mimetype.lastIndexOf("\/")
+    // //+ '.' + image.mimetype.substring(index1 + 1, image.mimetype.length)
+    // //+ '.' + video.mimetype.substring(index2 + 1, video.mimetype.length)
   }
 
 

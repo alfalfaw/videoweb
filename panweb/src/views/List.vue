@@ -125,12 +125,14 @@ export default class List extends Vue {
   async changeColor({ target }, card) {
     //原本red，点击后是grey，like为false
     // alert(id);
-    let like = target.style.color === "red" ? false : true;
+    let like = card.type === "favorite" ? false : true;
     if (!like) {
-      target.style.color = "grey";
+      card.type = "history"
+      // target.style.color = "grey";
       card.favorite_num--;
     } else {
-      target.style.color = "red";
+      // target.style.color = "red";
+      card.type = "favorite"
       card.favorite_num++;
     }
     //获取token

@@ -33,9 +33,9 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 //videoplayer
 import VideoPlayer from "vue-video-player";
 require("video.js/dist/video-js.css");
-// require("vue-video-player/src/custom-theme.css");
-import "videojs-hotkeys";
-import "videojs-flash";
+require("vue-video-player/src/custom-theme.css");
+// import "videojs-hotkeys";
+// import "videojs-flash";
 Vue.use(VideoPlayer);
 //不能缺少{}
 @Component({})

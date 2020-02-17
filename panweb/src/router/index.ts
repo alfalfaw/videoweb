@@ -16,7 +16,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    // name: 'Home',
     component: Home,
     children: [
       {

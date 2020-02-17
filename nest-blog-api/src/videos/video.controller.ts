@@ -137,7 +137,7 @@ export class VideosController {
             if (userFavorites.includes(video._id.toString())) {
                 video['type'] = 'favorite'
             } else {
-                video['type'] = 'none'
+                video['type'] = 'undefined'
             }
             results.push(video)
 
@@ -241,8 +241,8 @@ export class VideosController {
             column: [
                 { prop: "title", label: "标题", sortable: true, search: true, regex: true, row: true },
                 { prop: "desc", label: "描述", sortable: true, row: true },
-                { prop: "click_num", label: "点击", sortable: true, row: true },
-                { prop: "favorite_num", label: "收藏", sortable: true, row: true },
+                { prop: "click_num", label: "点击", sortable: true, row: true, value: 0 },
+                { prop: "favorite_num", label: "收藏", sortable: true, row: true, value: 0 },
                 { prop: "author", label: "作者", row: true },
                 { prop: "createdAt", label: "创建时间", editDisplay: false, addDisplay: false, sortable: true, type: "date", format: "yyyy-MM-dd hh:mm" },
                 { prop: "updatedAt", label: "更新时间", editDisplay: false, addDisplay: false, sortable: true, type: "date", format: "yyyy-MM-dd hh:mm" },
