@@ -160,7 +160,7 @@ export default class Home extends Vue {
   logout() {
     window.localStorage.token = ''
     window.localStorage.admin = ''
-    this.$router.go(0)
+    this.$router.push('/')
   }
 
   reset() {
