@@ -138,7 +138,7 @@ export default class Home extends Vue {
         this.sheet = false
         this.isLogin = true
         // this.isAdmin = res.data.admin;
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.admin) {
           this.isAdmin = true
           //保存是否为管理员
@@ -148,7 +148,7 @@ export default class Home extends Vue {
           //保存是否为管理员
           window.localStorage.setItem('admin', '')
         }
-        // this.$router.go("/");
+        this.$router.go(0)
       }
     } catch (error) {
       // this.showDialog("error", "密码不对哦");
@@ -174,7 +174,7 @@ export default class Home extends Vue {
   async register() {
     if (this.loginModel.username == '' || this.loginModel.password == '') {
       this.$message.warning('请填写用户必要信息')
-      return
+      return false
     }
 
     //解构赋值
@@ -184,7 +184,7 @@ export default class Home extends Vue {
     if (!res.data.success) {
       // this.showDialog("error", res.data.msg);
       this.$message.warning(res.data.msg)
-      return
+      return false
     }
     this.$message.success('注册成功，请重新登录')
     this.$router.go(0)
