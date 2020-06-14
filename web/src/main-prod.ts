@@ -17,7 +17,7 @@ Vue.config.productionTip = false
 
 // });
 // axios.defaults.baseURL = 'http://localhost:5000';
-axios.defaults.baseURL = 'https://alfalfa.website:5000'
+axios.defaults.baseURL = 'https://video.alfalfa.website'
 
 // 拦截请求，带上token
 axios.interceptors.request.use(
