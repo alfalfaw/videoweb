@@ -24,8 +24,8 @@ async function bootstrap() {
     //访问前缀
     prefix: '/uploads'
   })
-  app.use(bodyParser.json({ limit: '1000mb' }))
-  app.use(bodyParser.urlencoded({ limit: '1000mb', extended: true }))
+  // app.use(bodyParser.json({ limit: '1000mb' }))
+  // app.use(bodyParser.urlencoded({ limit: '1000mb', extended: true }))
   app.useStaticAssets('public')
   //开启全局验证
   app.useGlobalPipes(new ValidationPipe())
