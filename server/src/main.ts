@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import * as bodyParser from 'body-parser'
+const history = require('connect-history-api-fallback')
 async function bootstrap() {
   //云端
   // const fs = require('fs');
@@ -19,6 +20,8 @@ async function bootstrap() {
   //云端
   //本地运行
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
+
+  app.use(history())
   //本地运行
   app.useStaticAssets('uploads', {
     //访问前缀
