@@ -23,7 +23,7 @@ axios.defaults.baseURL = 'https://video.alfalfa.website'
 axios.interceptors.request.use(
   config => {
     // 添加请求头
-    if (localStorage.token) config.headers.Authorization = 'Bearer ' + localStorage.token
+    if (localStorage.token) config.headers.Authorization = localStorage.token
     return config
   },
   error => {
