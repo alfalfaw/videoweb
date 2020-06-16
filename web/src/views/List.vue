@@ -9,14 +9,12 @@
     </v-row>
     <v-row dense v-show="this.$route.query.keyword">
       <v-col>
-        <v-parallax height="300" dark :src="require('@/assets/images/banner.jpg')">
-          <v-row align="center" justify="center">
-            <v-col class="text-center" cols="12">
-              <h1 class="display-1 font-weight-thin mb-4">搜索 {{ this.$route.query.keyword }}</h1>
-              <!-- <h4 class="subheading"></h4> -->
-            </v-col>
-          </v-row>
-        </v-parallax>
+        <v-row align="center" justify="center" class="bg">
+          <v-col class="text-center" cols="12">
+            <h1 class="display-1 font-weight-thin mb-4">搜索 {{ this.$route.query.keyword }}</h1>
+            <!-- <h4 class="subheading"></h4> -->
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
     <v-row dense>
@@ -166,5 +164,14 @@ export default class List extends Vue {
   font-size: 0.875rem !important;
   margin-right: 10px;
   // min-width: 25px;
+}
+
+.bg {
+  height: 300px;
+  img {
+  }
+  background: url(../assets/images/banner.jpg);
+  background-position: center;
+  background-size: cover;
 }
 </style>
