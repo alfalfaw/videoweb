@@ -22,7 +22,7 @@
     <v-row dense>
       <v-col v-for="(card, index) in cards" :key="index" cols="12" :lg="4" :md="4" :sm="6">
         <v-card color="dark">
-          <router-link :to="'play/' + card._id" class="card-title">
+          <router-link tag="div" :to="'play/' + card._id" class="card-title">
             <v-img :src="card.cover" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.2)" height="180px">
               <!-- <v-card-title v-text="card.title"></v-card-title> -->
             </v-img>

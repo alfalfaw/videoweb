@@ -63,6 +63,7 @@ button:focus {
   padding: 0 !important;
 }
 .card-title {
+  margin-bottom: 5px;
   font-size: 16px !important;
 }
 .subheading {
