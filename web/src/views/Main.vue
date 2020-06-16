@@ -7,7 +7,7 @@
     </el-aside>
     <el-container>
       <el-header height="50px">
-        <h2 class="center">GeekVideo</h2>
+        <h2 class="center">酷视频</h2>
         <!-- Header content -->
       </el-header>
       <el-main>
