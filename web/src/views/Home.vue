@@ -48,7 +48,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
       <!-- <v-icon class="mx-4">home</v-icon> -->
       <v-toolbar-title class="mr-12 align-center">
-        <span class="title white--text text--lighten-1">极客视频</span>
+        <span class="title white--text text--lighten-1">酷视频</span>
       </v-toolbar-title>
       <v-spacer />
       <v-row align="center" style="max-width: 600px">
@@ -79,7 +79,7 @@
       <v-row>
         <v-col class="text-center text-white" cols="12">
           {{ new Date().getFullYear() }} —
-          <strong>极客视频</strong>
+          <strong>酷视频</strong>
         </v-col>
       </v-row>
     </v-content>
@@ -114,8 +114,8 @@ export default class Home extends Vue {
     { icon: 'home', text: '主页', link: '/' },
     { icon: 'favorite', text: '收藏', link: '/user/favorite' },
     { icon: 'history', text: '历史', link: '/user/history' },
-    { icon: 'archive', text: '归档', link: '/archive' },
-    { icon: 'folder', text: '文件', link: '/file' }
+    { icon: 'archive', text: '归档', link: '/archive' }
+    // { icon: 'folder', text: '文件', link: '/file' }
   ]
   //表单
   sheet = false
@@ -160,7 +160,7 @@ export default class Home extends Vue {
   logout() {
     window.localStorage.token = ''
     window.localStorage.admin = ''
-    this.$router.push('/')
+    this.$router.go(0)
   }
 
   reset() {

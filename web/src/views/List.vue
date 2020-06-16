@@ -22,15 +22,16 @@
     <v-row dense>
       <v-col v-for="(card, index) in cards" :key="index" cols="12" :lg="4" :md="4" :sm="6">
         <v-card color="dark">
-          <router-link :to="'play/' + card._id">
+          <router-link :to="'play/' + card._id" class="card-title">
             <v-img :src="card.cover" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.2)" height="180px">
               <!-- <v-card-title v-text="card.title"></v-card-title> -->
             </v-img>
           </router-link>
           <v-card-text class="text--primary align-end">
-            <router-link :to="'/play/' + card._id">
-              <p class="font-weight-medium headline white--text">{{ card.title }}</p>
+            <router-link tag="div" :to="'/play/' + card._id">
+              <div class="card-title">{{ card.title }}</div>
             </router-link>
+
             <div class="text--secondary subtitle-2">{{ card.createdAt | formatTime }}</div>
           </v-card-text>
 
@@ -38,7 +39,9 @@
             <!-- <v-spacer></v-spacer> -->
 
             <v-btn icon>
-              <v-icon :style="{ color: card.type === 'favorite' ? 'red' : 'grey' }" @click="changeColor($event, card)">mdi-heart</v-icon>
+              <v-icon size="medium" :style="{ color: card.type === 'favorite' ? 'red' : 'grey' }" @click="changeColor($event, card)"
+                >mdi-heart</v-icon
+              >
             </v-btn>
             <span class="card-meta">{{ card.favorite_num }}</span>
 
@@ -47,7 +50,7 @@
             </v-btn>-->
 
             <!-- <v-btn icon> -->
-            <v-icon>mdi-eye</v-icon>
+            <v-icon size="medium">mdi-eye</v-icon>
             <span class="card-meta ml-2">{{ card.click_num }}</span>
             <!-- </v-btn> -->
           </v-card-actions>
@@ -160,6 +163,7 @@ export default class List extends Vue {
 </script>
 <style lang="less" scoped>
 .card-meta {
+  font-size: 0.875rem !important;
   margin-right: 10px;
   // min-width: 25px;
 }

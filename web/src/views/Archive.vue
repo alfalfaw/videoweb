@@ -43,8 +43,6 @@
                   <span class="title font-weight-light">{{ video.title }}</span>
                 </v-card-title>
 
-                <v-card-text class="headline">{{ video.title }}</v-card-text>
-
                 <v-card-actions>
                   <v-list-item class="grow">
                     <v-list-item-content>
@@ -52,10 +50,10 @@
                     </v-list-item-content>
 
                     <v-row align="center" justify="end">
-                      <v-icon class="mr-1">mdi-eye</v-icon>
+                      <v-icon size="medium" class="mr-1">mdi-eye</v-icon>
                       <span class="subheading mr-2">{{ video.click_num }}</span>
                       <span class="mr-1"></span>
-                      <v-icon class="mr-1">mdi-heart</v-icon>
+                      <v-icon size="medium" class="mr-1">mdi-heart</v-icon>
                       <span class="subheading">{{ video.favorite_num }}</span>
                     </v-row>
                   </v-list-item>

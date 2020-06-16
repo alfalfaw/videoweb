@@ -24,10 +24,10 @@
           </router-link>
 
           <v-card-text class="text--primary align-end">
-            <router-link :to="'/play/' + card._id">
-              <div class="headline white--text">{{ card.title }}</div>
+            <router-link tag="div" :to="'/play/' + card._id">
+              <div class="card-title">{{ card.title }}</div>
             </router-link>
-            <div>{{ card.createdAt | formatTime }}</div>
+            <div class="text--secondary subtitle-2">{{ card.createdAt | formatTime }}</div>
           </v-card-text>
 
           <v-card-actions>
@@ -35,7 +35,9 @@
 
             <v-btn icon>
               <!-- :color=" card.type === 'favorite'?'red':'' " -->
-              <v-icon :style="{ color: card.type === 'favorite' ? 'red' : 'grey' }" @click="changeColor($event, card)">mdi-heart</v-icon>
+              <v-icon size="medium" :style="{ color: card.type === 'favorite' ? 'red' : 'grey' }" @click="changeColor($event, card)"
+                >mdi-heart</v-icon
+              >
             </v-btn>
             <span class="card-meta">{{ card.favorite_num }}</span>
 
@@ -43,7 +45,7 @@
               <v-icon>mdi-bookmark</v-icon>
             </v-btn>-->
 
-            <v-icon>mdi-eye</v-icon>
+            <v-icon size="medium">mdi-eye</v-icon>
             <span class="card-meta ml-2">{{ card.click_num }}</span>
           </v-card-actions>
         </v-card>
@@ -150,6 +152,8 @@ export default class Record extends Vue {
 </script>
 <style lang="less" scoped>
 .card-meta {
+  font-size: 0.875rem !important;
+
   margin-right: 10px;
   // min-width: 25px;
 }
