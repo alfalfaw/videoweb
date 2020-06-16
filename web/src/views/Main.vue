@@ -11,7 +11,6 @@
         <!-- Header content -->
       </el-header>
       <el-main>
-        <!-- vue复用基于path更新数据 -->
         <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
