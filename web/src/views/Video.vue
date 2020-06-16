@@ -9,7 +9,7 @@
             :playsinline="true"
             :options="playerOptions"
           ></video-player>
-          <v-btn
+          <!-- <v-btn
             absolute
             dark
             fab
@@ -22,7 +22,7 @@
             @click="changeColor($event)"
           >
             <v-icon>mdi-heart</v-icon>
-          </v-btn>
+          </v-btn> -->
         </div>
         <!-- @ready="playerIsReady" -->
       </v-col>

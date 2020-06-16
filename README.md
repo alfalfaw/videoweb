@@ -1,4 +1,6 @@
-## 视频网站
+## 简介
+
+`NestJS + Vue 开发的视频网站`
 
 ### 安装依赖
 
@@ -15,3 +17,7 @@ pm2 start  dist/main.js --name video
 or
 npm run pm2
 ```
+
+### 线上地址
+
+https://video.alfalfa.website
